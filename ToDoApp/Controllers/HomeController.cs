@@ -47,8 +47,7 @@ namespace ToDoApp.Controllers
         [HttpPost]
         public ActionResult Save(int SelectedYear)
         {
-            TempData["Message"] = "Data posted!";
-            TempData["SelectedYear"] = SelectedYear;
+            TempData["Message"] = $"Data posted! Selected year: {SelectedYear}";
             return RedirectToAction("Confirmation");
         }
 

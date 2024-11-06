@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ToDoApp.Models;
 
 namespace ToDoApp.Controllers
 {
@@ -15,16 +16,44 @@ namespace ToDoApp.Controllers
 
         public ActionResult GetPageContent()
         {
-            return PartialView("Content/ContentPartialView");
+            return PartialView("ContentPartialView");
         }
 
         public ActionResult Form()
         {
+            var years = DataHelper.GetYears(DateTime.Now);
+            ViewBag.Years = new SelectList(years, "ID", "Name");
             return View();
         }
 
         public ActionResult Student()
         {
+            return View(new StudentViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult Student(StudentViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Save the student data to the database or perform other actions
+                TempData["Message"] = "Student data posted!";
+                return RedirectToAction("Confirmation");
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Save(int SelectedYear)
+        {
+            TempData["Message"] = "Data posted!";
+            return RedirectToAction("Confirmation");
+        }
+
+        public ActionResult Confirmation()
+        {
+            ViewBag.Message = TempData["Message"];
             return View();
         }
     }

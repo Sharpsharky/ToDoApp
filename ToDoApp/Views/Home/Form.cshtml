@@ -1,1 +1,11 @@
-﻿
+﻿@{
+    ViewBag.Title = "Form Page";
+}
+
+<h2>Form</h2>
+
+@using (Html.BeginForm("Save", "Home", FormMethod.Post))
+{
+    @Html.DropDownList("SelectedYear", ViewBag.Years as SelectList, new { @class = "form-control" })
+    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Save</button>
+}

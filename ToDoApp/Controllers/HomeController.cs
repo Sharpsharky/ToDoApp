@@ -14,9 +14,9 @@ namespace ToDoApp.Controllers
             return View();
         }
 
-        public ActionResult GetPageContent()
+        public ActionResult ContentPartialView()
         {
-            return PartialView("ContentPartialView");
+            return PartialView();
         }
 
         public ActionResult Form()
@@ -48,12 +48,14 @@ namespace ToDoApp.Controllers
         public ActionResult Save(int SelectedYear)
         {
             TempData["Message"] = "Data posted!";
+            TempData["SelectedYear"] = SelectedYear;
             return RedirectToAction("Confirmation");
         }
 
         public ActionResult Confirmation()
         {
             ViewBag.Message = TempData["Message"];
+            ViewBag.SelectedYear = TempData["SelectedYear"];
             return View();
         }
     }

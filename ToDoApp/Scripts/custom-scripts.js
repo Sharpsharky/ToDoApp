@@ -1,15 +1,21 @@
 function LoadContent() {
     $.ajax({
-        url: loadContentUrl,
+        url: '/Home/ContentPartialView',
         type: 'GET',
         success: function (data) {
-            $("#ContentID").html(data);
+            $('#ContentID').html(data);
         },
-        error: function (xhr, status, error) {
-            console.error("Error: " + error);
+        error: function () {
+            alert('Error loading content.');
         }
     });
 }
+
+$(document).ready(function () {
+    $('#loadContentButton').click(function () {
+        LoadContent();
+    });
+});
 
 function ClearContent() {
     $("#ContentID").html('');
